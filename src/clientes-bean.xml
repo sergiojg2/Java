@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!--<bean id="cliente1" class="crazy.model.client.Cliente">
+		<property name="nombre" value="Mario"></property>
+		<property name="apellido" value="Vargas Llosa"></property>
+		<property name="email" value="mvL@gmail.com"></property>
+	</bean>-->
+	<!--<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+	<property name="driverClassName" value="${driver}"></property>
+		<property name="url" value="${url}"></property>
+		<property name="username" value="${user}"></property>
+		<property name="password" value="${password}"></property>
+		</bean>-->
+		<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	
+		<property name="jdbcUrl" value="${url}"></property>
+		<property name="username" value="${user}"></property>
+		<property name="password" value="${password}"></property>
+		</bean>
+		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views"></property>
+		<property  name="suffix" value=".jsp"></property>
+		</bean>
+	<!-- 
+	<bean id="cliente1" class="crazy.model.client.Cliente">
+		<property name="nombre" value="${cliente1.name}"></property>
+		<property name="apellido" value="${cliente1.surname}"></property>
+		<property name="email" value="${cliente1.email}"></property>
+	</bean>
+	-->
+	<!-- -->
+	<context:component-scan base-package="crazy.dao"></context:component-scan>
+	<context:component-scan base-package="crazy.service"></context:component-scan>
+	<context:component-scan base-package="crazy.controller"></context:component-scan>
+	
+	<bean id="cliente2" class="crazy.model.client.Cliente">
+		<property name="nombre" value="Joan"></property>
+		<property name="apellido" value="Miro"></property>
+		<property name="email" value="jmiro@gmail.com"></property>
+	</bean>
+	<!-- aqui pondremos el fichero de propiedades de la base de datos-->
+	<context:property-placeholder location="mycrazy.properties" />
+	<!-- <bean id="cdao" class="crazy.dao.ClientDAO"></bean>
+	
+	<bean id="clientSrv" class="crazy.service.client.ClienteService">
+		<property name="clDao" ref="cdao"></property>
+	</bean> -->
+</beans> 
